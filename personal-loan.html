@@ -1,0 +1,1056 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Personal Loan – Hard Jangid</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --ink:      #0f1923;
+      --paper:    #f7f4ef;
+      --cream:    #ede9e1;
+      --gold:     #c8922a;
+      --gold-lt:  #e8b84b;
+      --muted:    #6b7280;
+      --white:    #ffffff;
+      --green:    #2d7a4f;
+      --red:      #c0392b;
+      --rule:     rgba(15,25,35,.12);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--paper);
+      color: var(--ink);
+      font-size: 16px;
+      line-height: 1.6;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(247,244,239,.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--rule);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 5vw; height: 64px;
+    }
+    .nav-brand {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.3rem; font-weight: 900;
+      color: var(--ink); letter-spacing: -.02em;
+    }
+    .nav-brand span { color: var(--gold); }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a {
+      font-size: .85rem; font-weight: 500;
+      color: var(--muted); text-decoration: none;
+      letter-spacing: .04em; text-transform: uppercase;
+      transition: color .2s;
+    }
+    .nav-links a:hover { color: var(--gold); }
+    .nav-cta {
+      background: var(--gold); color: var(--white);
+      border: none; border-radius: 4px;
+      padding: .5rem 1.2rem; font-size: .85rem; font-weight: 600;
+      cursor: pointer; transition: background .2s;
+    }
+    .nav-cta:hover { background: var(--gold-lt); }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      background: var(--ink);
+      display: flex; align-items: center;
+      padding: 120px 5vw 80px;
+      position: relative; overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse 60% 80% at 80% 50%, rgba(200,146,42,.15), transparent);
+      pointer-events: none;
+    }
+    .hero-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 4rem; align-items: center; max-width: 1200px; margin: 0 auto; width: 100%;
+    }
+    .hero-eyebrow {
+      font-family: 'DM Mono', monospace;
+      font-size: .78rem; letter-spacing: .12em;
+      color: var(--gold); text-transform: uppercase; margin-bottom: 1.2rem;
+    }
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.8rem, 5vw, 4.5rem);
+      font-weight: 900; line-height: 1.08;
+      color: var(--white); margin-bottom: 1.5rem;
+      letter-spacing: -.03em;
+    }
+    .hero h1 em { color: var(--gold); font-style: normal; }
+    .hero-sub {
+      color: rgba(255,255,255,.6);
+      font-size: 1.05rem; line-height: 1.7;
+      margin-bottom: 2.5rem; max-width: 480px;
+    }
+    .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .btn-primary {
+      background: var(--gold); color: var(--white);
+      padding: .85rem 2rem; border-radius: 4px;
+      font-weight: 600; text-decoration: none;
+      font-size: .95rem; transition: background .2s;
+    }
+    .btn-primary:hover { background: var(--gold-lt); }
+    .btn-outline {
+      border: 1px solid rgba(255,255,255,.3); color: var(--white);
+      padding: .85rem 2rem; border-radius: 4px;
+      font-weight: 500; text-decoration: none;
+      font-size: .95rem; transition: border-color .2s, color .2s;
+    }
+    .btn-outline:hover { border-color: var(--gold); color: var(--gold); }
+
+    .hero-stats {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+    }
+    .stat-card {
+      background: rgba(255,255,255,.05);
+      border: 1px solid rgba(255,255,255,.08);
+      border-radius: 8px; padding: 1.5rem;
+      transition: border-color .2s;
+    }
+    .stat-card:hover { border-color: rgba(200,146,42,.4); }
+    .stat-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.4rem; font-weight: 900;
+      color: var(--gold-lt); line-height: 1;
+      margin-bottom: .3rem;
+    }
+    .stat-label { color: rgba(255,255,255,.55); font-size: .82rem; }
+
+    /* ── SECTIONS ── */
+    section { padding: 90px 5vw; }
+    .section-inner { max-width: 1200px; margin: 0 auto; }
+    .section-eyebrow {
+      font-family: 'DM Mono', monospace;
+      font-size: .75rem; letter-spacing: .12em;
+      text-transform: uppercase; color: var(--gold);
+      margin-bottom: .8rem;
+    }
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.8rem, 3vw, 2.6rem);
+      font-weight: 700; line-height: 1.15;
+      color: var(--ink); margin-bottom: 1rem;
+    }
+    .section-lead {
+      color: var(--muted); font-size: 1.05rem;
+      max-width: 600px; line-height: 1.75;
+      margin-bottom: 3rem;
+    }
+    hr.rule { border: none; border-top: 1px solid var(--rule); margin-bottom: 3rem; }
+
+    /* ── WHAT IS A PERSONAL LOAN ── */
+    .info-strip {
+      background: var(--cream);
+    }
+    .info-cols {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 4rem; align-items: start;
+    }
+    .info-body p { color: var(--muted); line-height: 1.8; margin-bottom: 1.2rem; }
+
+    .highlight-box {
+      background: var(--ink); color: var(--white);
+      border-radius: 10px; padding: 2rem;
+    }
+    .highlight-box h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.3rem; margin-bottom: 1.2rem; color: var(--gold-lt);
+    }
+    .highlight-list { list-style: none; }
+    .highlight-list li {
+      display: flex; gap: .8rem; align-items: flex-start;
+      padding: .6rem 0; border-bottom: 1px solid rgba(255,255,255,.08);
+      font-size: .92rem; color: rgba(255,255,255,.75);
+    }
+    .highlight-list li:last-child { border-bottom: none; }
+    .highlight-list li::before { content: '→'; color: var(--gold); flex-shrink: 0; }
+
+    /* ── TYPES ── */
+    .types-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.5rem;
+    }
+    .type-card {
+      background: var(--white); border-radius: 10px;
+      border: 1px solid var(--rule);
+      padding: 1.8rem; transition: box-shadow .2s, border-color .2s;
+    }
+    .type-card:hover { box-shadow: 0 8px 30px rgba(0,0,0,.07); border-color: var(--gold); }
+    .type-icon {
+      font-size: 1.8rem; margin-bottom: 1rem;
+    }
+    .type-card h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem; font-weight: 700;
+      margin-bottom: .6rem;
+    }
+    .type-card p { color: var(--muted); font-size: .9rem; line-height: 1.6; }
+
+    /* ── HOW IT WORKS ── */
+    .steps-section { background: var(--cream); }
+    .steps-row {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 0; position: relative;
+    }
+    .steps-row::before {
+      content: '';
+      position: absolute; top: 38px; left: 5%; right: 5%;
+      height: 1px; background: var(--gold); opacity: .3;
+      z-index: 0;
+    }
+    .step {
+      text-align: center; padding: 2rem 1.5rem; position: relative; z-index: 1;
+    }
+    .step-num {
+      width: 56px; height: 56px; border-radius: 50%;
+      background: var(--gold); color: var(--white);
+      font-family: 'Playfair Display', serif;
+      font-weight: 900; font-size: 1.2rem;
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 1rem;
+    }
+    .step h3 { font-weight: 600; font-size: .95rem; margin-bottom: .5rem; }
+    .step p { color: var(--muted); font-size: .87rem; line-height: 1.6; }
+
+    /* ── ELIGIBILITY ── */
+    .elig-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 3rem; align-items: start;
+    }
+    .elig-table { width: 100%; border-collapse: collapse; }
+    .elig-table th {
+      text-align: left; font-size: .78rem;
+      letter-spacing: .08em; text-transform: uppercase;
+      color: var(--muted); padding: .7rem 1rem;
+      border-bottom: 2px solid var(--rule);
+    }
+    .elig-table td {
+      padding: .8rem 1rem; font-size: .92rem;
+      border-bottom: 1px solid var(--rule);
+    }
+    .elig-table tr:hover td { background: var(--cream); }
+    .badge {
+      display: inline-block; padding: .2rem .6rem;
+      border-radius: 99px; font-size: .75rem; font-weight: 600;
+    }
+    .badge-green { background: #d1fae5; color: var(--green); }
+    .badge-amber { background: #fef3c7; color: #92400e; }
+
+    .elig-aside { }
+    .tip-card {
+      background: var(--white); border-left: 4px solid var(--gold);
+      border-radius: 0 8px 8px 0; padding: 1.2rem 1.4rem;
+      margin-bottom: 1.2rem; font-size: .9rem; color: var(--muted);
+    }
+    .tip-card strong { color: var(--ink); display: block; margin-bottom: .3rem; }
+
+    /* ── CALCULATOR ── */
+    .calc-section { background: var(--ink); }
+    .calc-section .section-title { color: var(--white); }
+    .calc-section .section-lead { color: rgba(255,255,255,.5); }
+    .calc-section .section-eyebrow { color: var(--gold); }
+
+    .calc-wrapper {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 2.5rem; align-items: start;
+    }
+    .calc-form {
+      background: rgba(255,255,255,.05);
+      border: 1px solid rgba(255,255,255,.1);
+      border-radius: 12px; padding: 2.5rem;
+    }
+    .form-group { margin-bottom: 1.8rem; }
+    label.form-label {
+      display: flex; justify-content: space-between;
+      font-size: .82rem; font-weight: 500;
+      color: rgba(255,255,255,.65);
+      text-transform: uppercase; letter-spacing: .06em;
+      margin-bottom: .6rem;
+    }
+    label.form-label span {
+      font-family: 'DM Mono', monospace;
+      color: var(--gold-lt); font-weight: 600; font-size: .9rem;
+    }
+    input[type=range] {
+      width: 100%; -webkit-appearance: none; appearance: none;
+      height: 4px; border-radius: 2px;
+      background: rgba(255,255,255,.15);
+      outline: none; cursor: pointer;
+    }
+    input[type=range]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 20px; height: 20px;
+      border-radius: 50%; background: var(--gold);
+      border: 3px solid var(--ink); cursor: pointer;
+      box-shadow: 0 0 0 2px var(--gold);
+    }
+    .range-labels {
+      display: flex; justify-content: space-between;
+      font-size: .73rem; color: rgba(255,255,255,.3);
+      margin-top: .4rem; font-family: 'DM Mono', monospace;
+    }
+    .calc-select {
+      width: 100%; padding: .7rem 1rem;
+      background: rgba(255,255,255,.07);
+      border: 1px solid rgba(255,255,255,.15);
+      border-radius: 6px; color: var(--white);
+      font-family: 'Inter', sans-serif; font-size: .95rem;
+      outline: none; cursor: pointer;
+    }
+    .calc-select option { background: var(--ink); }
+
+    .calc-results {
+      border-radius: 12px; overflow: hidden;
+    }
+    .result-top {
+      background: var(--gold);
+      padding: 2rem 2.5rem; text-align: center;
+    }
+    .result-top p {
+      font-size: .8rem; letter-spacing: .1em;
+      text-transform: uppercase; color: rgba(255,255,255,.8);
+      margin-bottom: .4rem;
+    }
+    .result-emi {
+      font-family: 'Playfair Display', serif;
+      font-size: 3.2rem; font-weight: 900;
+      color: var(--white); line-height: 1;
+    }
+    .result-emi sup { font-size: 1.5rem; vertical-align: super; }
+    .result-grid {
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.1);
+      border-top: none; border-radius: 0 0 12px 12px;
+      padding: 2rem 2.5rem;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;
+    }
+    .result-item { text-align: center; }
+    .result-item-label {
+      font-size: .75rem; letter-spacing: .08em;
+      text-transform: uppercase; color: rgba(255,255,255,.45);
+      margin-bottom: .3rem;
+    }
+    .result-item-value {
+      font-family: 'DM Mono', monospace;
+      font-size: 1.1rem; color: var(--white); font-weight: 500;
+    }
+    .donut-wrap { text-align: center; margin-top: 1.5rem; }
+    .donut-wrap svg { max-width: 180px; }
+
+    /* ── INTEREST RATES ── */
+    .rates-table-wrap { overflow-x: auto; }
+    .rates-table {
+      width: 100%; border-collapse: collapse;
+      font-size: .9rem;
+    }
+    .rates-table thead tr {
+      background: var(--ink); color: var(--white);
+    }
+    .rates-table thead th {
+      padding: 1rem 1.2rem; text-align: left;
+      font-size: .78rem; font-weight: 600;
+      letter-spacing: .06em; text-transform: uppercase;
+    }
+    .rates-table tbody tr { border-bottom: 1px solid var(--rule); }
+    .rates-table tbody tr:hover td { background: var(--cream); }
+    .rates-table td { padding: .9rem 1.2rem; }
+    .rate-pill {
+      background: #fef3c7; color: #92400e;
+      border-radius: 4px; padding: .15rem .5rem;
+      font-family: 'DM Mono', monospace; font-size: .82rem; font-weight: 600;
+    }
+
+    /* ── FAQ ── */
+    .faq-section { background: var(--cream); }
+    .faq-list { max-width: 780px; }
+    .faq-item {
+      border-bottom: 1px solid var(--rule);
+    }
+    .faq-q {
+      width: 100%; background: none; border: none; cursor: pointer;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 1.3rem 0; text-align: left;
+      font-size: .97rem; font-weight: 600; color: var(--ink);
+    }
+    .faq-q .icon {
+      width: 28px; height: 28px; border-radius: 50%;
+      background: var(--ink); color: var(--white);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0; font-size: 1rem; transition: transform .3s;
+    }
+    .faq-item.open .faq-q .icon { transform: rotate(45deg); }
+    .faq-a {
+      max-height: 0; overflow: hidden;
+      transition: max-height .35s ease, padding .35s ease;
+    }
+    .faq-a p {
+      padding-bottom: 1.2rem; color: var(--muted);
+      font-size: .92rem; line-height: 1.75;
+    }
+    .faq-item.open .faq-a { max-height: 300px; }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--ink); color: rgba(255,255,255,.5);
+      padding: 60px 5vw 40px;
+    }
+    .footer-inner { max-width: 1200px; margin: 0 auto; }
+    .footer-top {
+      display: grid; grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 3rem; margin-bottom: 3rem;
+      padding-bottom: 3rem; border-bottom: 1px solid rgba(255,255,255,.1);
+    }
+    .footer-brand {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.6rem; font-weight: 900;
+      color: var(--white); margin-bottom: .8rem;
+    }
+    .footer-brand span { color: var(--gold); }
+    .footer-about { font-size: .88rem; line-height: 1.7; }
+    .footer-col h4 {
+      font-size: .78rem; letter-spacing: .1em;
+      text-transform: uppercase; color: rgba(255,255,255,.35);
+      margin-bottom: 1rem;
+    }
+    .footer-col ul { list-style: none; }
+    .footer-col li { margin-bottom: .6rem; }
+    .footer-col a {
+      color: rgba(255,255,255,.55); font-size: .88rem;
+      text-decoration: none; transition: color .2s;
+    }
+    .footer-col a:hover { color: var(--gold); }
+    .footer-bottom {
+      display: flex; justify-content: space-between; align-items: center;
+      font-size: .8rem; flex-wrap: wrap; gap: 1rem;
+    }
+    .creator-tag {
+      font-family: 'DM Mono', monospace;
+      color: var(--gold); font-size: .82rem;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      .hero-grid, .info-cols, .elig-grid, .calc-wrapper, .footer-top { grid-template-columns: 1fr; }
+      .hero-stats { grid-template-columns: 1fr 1fr; }
+      .steps-row::before { display: none; }
+      nav .nav-links { display: none; }
+    }
+    @media (max-width: 500px) {
+      .hero-stats { grid-template-columns: 1fr; }
+      .result-grid { grid-template-columns: 1fr; }
+    }
+
+    /* scrollbar */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--paper); }
+    ::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 3px; }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-brand">Personal<span>Loan</span></div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#types">Types</a></li>
+    <li><a href="#calculator">Calculator</a></li>
+    <li><a href="#rates">Rates</a></li>
+    <li><a href="#faq">FAQ</a></li>
+  </ul>
+  <button class="nav-cta" onclick="document.getElementById('calculator').scrollIntoView({behavior:'smooth'})">Calculate EMI</button>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-grid">
+    <div>
+      <p class="hero-eyebrow">India's Personal Finance Guide</p>
+      <h1>Smart Loans,<br/><em>Smarter</em> Decisions.</h1>
+      <p class="hero-sub">Everything you need to understand, compare, and calculate personal loans — from eligibility to EMIs — in one place.</p>
+      <div class="hero-btns">
+        <a href="#calculator" class="btn-primary">Calculate My EMI</a>
+        <a href="#about" class="btn-outline">Learn More</a>
+      </div>
+    </div>
+    <div class="hero-stats">
+      <div class="stat-card">
+        <div class="stat-num">₹40L</div>
+        <div class="stat-label">Maximum loan amount available</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">10.5%</div>
+        <div class="stat-label">Interest rates starting from</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">24 hrs</div>
+        <div class="stat-label">Typical disbursal time</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">60 mo</div>
+        <div class="stat-label">Flexible repayment tenure</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHAT IS A PERSONAL LOAN -->
+<section class="info-strip" id="about">
+  <div class="section-inner">
+    <div class="info-cols">
+      <div class="info-body">
+        <p class="section-eyebrow">The Basics</p>
+        <h2 class="section-title">What is a Personal Loan?</h2>
+        <p>A personal loan is an <strong>unsecured credit facility</strong> offered by banks, NBFCs, and digital lenders. Unlike a home loan or car loan, it does not require any collateral — your creditworthiness alone secures the funds.</p>
+        <p>You borrow a fixed sum and repay it in equal monthly instalments (EMIs) spread over a chosen tenure, usually 12 to 60 months. The interest rate is fixed at the time of sanction, so your EMI never surprises you.</p>
+        <p>Personal loans are versatile: medical emergencies, travel, wedding costs, home renovation, education, or debt consolidation — lenders generally place no restrictions on end-use.</p>
+        <p style="color:var(--muted); font-size:.88rem; margin-top:1.5rem; padding-top:1rem; border-top:1px solid var(--rule)">
+          <strong style="color:var(--ink)">Unsecured vs Secured:</strong> Because there's no asset pledging, interest rates are higher than secured loans but approval is faster and paperwork lighter.
+        </p>
+      </div>
+      <div>
+        <div class="highlight-box">
+          <h3>Key Features at a Glance</h3>
+          <ul class="highlight-list">
+            <li>No collateral or guarantor required</li>
+            <li>Loan amount: ₹10,000 to ₹40,00,000</li>
+            <li>Tenure: 12 months to 60 months</li>
+            <li>Interest rate: 10.5% – 24% p.a. (varies by lender)</li>
+            <li>Processing fee: 0.5% – 3% of loan amount</li>
+            <li>Disbursal within 24–48 hours post-approval</li>
+            <li>Minimum CIBIL score: 700+ recommended</li>
+            <li>Prepayment allowed (charges may apply)</li>
+            <li>Flexible repayment via NACH/ECS auto-debit</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TYPES -->
+<section id="types">
+  <div class="section-inner">
+    <p class="section-eyebrow">Loan Categories</p>
+    <h2 class="section-title">Types of Personal Loans</h2>
+    <p class="section-lead">Different needs call for different products. Here are the most common personal loan variants available in India.</p>
+    <div class="types-grid">
+      <div class="type-card">
+        <div class="type-icon">🏥</div>
+        <h3>Medical Emergency Loan</h3>
+        <p>Covers hospitalisation, surgery, or critical-care expenses. Many lenders offer same-day disbursals for medical emergencies with minimal documentation.</p>
+      </div>
+      <div class="type-card">
+        <div class="type-icon">🎓</div>
+        <h3>Education Loan (Personal)</h3>
+        <p>Fund short courses, certifications, or overseas coaching when an education-specific loan isn't available. Amounts up to ₹10L with no institute tie-up needed.</p>
+      </div>
+      <div class="type-card">
+        <div class="type-icon">💍</div>
+        <h3>Wedding Loan</h3>
+        <p>Finance venue, catering, jewellery, or honeymoon without liquidating investments. Tenure up to 5 years keeps EMIs manageable.</p>
+      </div>
+      <div class="type-card">
+        <div class="type-icon">🏠</div>
+        <h3>Home Renovation Loan</h3>
+        <p>Interior upgrades, repairs, or furniture without pledging the property. Faster than a top-up home loan and available to renters too.</p>
+      </div>
+      <div class="type-card">
+        <div class="type-icon">✈️</div>
+        <h3>Travel Loan</h3>
+        <p>Plan your dream holiday, international trip, or pilgrimage without draining savings. Cover flights, hotels, and visa costs upfront.</p>
+      </div>
+      <div class="type-card">
+        <div class="type-icon">🔄</div>
+        <h3>Debt Consolidation Loan</h3>
+        <p>Merge multiple high-interest credit card dues or small loans into a single lower-rate EMI, simplifying repayment and reducing interest outgo.</p>
+      </div>
+      <div class="type-card">
+        <div class="type-icon">💼</div>
+        <h3>Business Personal Loan</h3>
+        <p>Self-employed individuals and small business owners can use personal loan proceeds for working capital, inventory, or equipment needs.</p>
+      </div>
+      <div class="type-card">
+        <div class="type-icon">📱</div>
+        <h3>Consumer Durable Loan</h3>
+        <p>Buy appliances, gadgets, or electronics with instant in-store or online financing. Some offers carry 0% interest for short tenures.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="steps-section">
+  <div class="section-inner">
+    <p class="section-eyebrow">The Process</p>
+    <h2 class="section-title">How to Apply for a Personal Loan</h2>
+    <p class="section-lead">Most lenders now offer end-to-end digital applications. Here's what the journey looks like.</p>
+    <div class="steps-row">
+      <div class="step">
+        <div class="step-num">1</div>
+        <h3>Check Eligibility</h3>
+        <p>Verify income, age, employment status, and CIBIL score requirements before applying.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <h3>Compare Lenders</h3>
+        <p>Compare interest rates, processing fees, prepayment charges, and customer service ratings.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <h3>Submit Application</h3>
+        <p>Fill the form online or in-branch. Provide KYC documents, income proof, and bank statements.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <h3>Verification</h3>
+        <p>Lender verifies documents, may call your employer, and runs a credit bureau check.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">5</div>
+        <h3>Sanction & Disbursal</h3>
+        <p>Receive the sanction letter, sign the agreement, and funds hit your bank account—often within 24 hours.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ELIGIBILITY -->
+<section id="eligibility">
+  <div class="section-inner">
+    <p class="section-eyebrow">Who Can Apply</p>
+    <h2 class="section-title">Eligibility Criteria</h2>
+    <p class="section-lead">Criteria vary slightly by lender, but these are the standard benchmarks across most banks and NBFCs in India.</p>
+    <div class="elig-grid">
+      <div>
+        <table class="elig-table">
+          <thead>
+            <tr>
+              <th>Parameter</th>
+              <th>Salaried</th>
+              <th>Self-Employed</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Age</td><td>21–60 years</td><td>25–65 years</td></tr>
+            <tr><td>Min. Income</td><td>₹15,000/month</td><td>₹2L/year (ITR)</td></tr>
+            <tr><td>Employment</td><td>Min. 1 year at current job</td><td>Min. 2 years in business</td></tr>
+            <tr><td>CIBIL Score</td><td><span class="badge badge-green">750+ ideal</span></td><td><span class="badge badge-green">750+ ideal</span></td></tr>
+            <tr><td>Existing EMIs</td><td>FOIR &lt;50%</td><td>FOIR &lt;50%</td></tr>
+            <tr><td>Nationality</td><td>Indian Resident</td><td>Indian Resident</td></tr>
+            <tr><td>Bank Account</td><td><span class="badge badge-amber">Mandatory</span></td><td><span class="badge badge-amber">Mandatory</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="elig-aside">
+        <div class="tip-card">
+          <strong>🎯 Improve your approval chances</strong>
+          Pay existing EMIs on time for 6+ months before applying. Even a 5-point CIBIL improvement can fetch better rates.
+        </div>
+        <div class="tip-card">
+          <strong>📋 Documents you'll typically need</strong>
+          PAN card, Aadhaar, last 3-month salary slips (or ITR + bank statements for self-employed), and a recent passport-size photo.
+        </div>
+        <div class="tip-card">
+          <strong>⚡ FOIR – Fixed Obligation to Income Ratio</strong>
+          Lenders want total EMI outgo (including the new loan) to stay below 40–50% of your monthly take-home pay.
+        </div>
+        <div class="tip-card">
+          <strong>🏦 Co-applicant option</strong>
+          Adding a co-applicant with a higher income or better credit score can increase the sanctioned amount and reduce the interest rate.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CALCULATOR -->
+<section class="calc-section" id="calculator">
+  <div class="section-inner">
+    <p class="section-eyebrow">EMI Calculator</p>
+    <h2 class="section-title">Plan Your Repayment</h2>
+    <p class="section-lead">Slide to adjust amount, rate, and tenure — your monthly instalment and total cost update instantly.</p>
+
+    <div class="calc-wrapper">
+      <!-- FORM -->
+      <div class="calc-form">
+
+        <div class="form-group">
+          <label class="form-label">Loan Amount <span id="lbl-amount">₹5,00,000</span></label>
+          <input type="range" id="inp-amount" min="10000" max="4000000" step="10000" value="500000"
+                 oninput="updateCalc()"/>
+          <div class="range-labels"><span>₹10K</span><span>₹40L</span></div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Annual Interest Rate <span id="lbl-rate">12.00%</span></label>
+          <input type="range" id="inp-rate" min="8" max="30" step="0.25" value="12"
+                 oninput="updateCalc()"/>
+          <div class="range-labels"><span>8%</span><span>30%</span></div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Tenure <span id="lbl-tenure">36 months</span></label>
+          <input type="range" id="inp-tenure" min="6" max="60" step="6" value="36"
+                 oninput="updateCalc()"/>
+          <div class="range-labels"><span>6 mo</span><span>60 mo</span></div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" style="margin-bottom:.6rem">Loan Type</label>
+          <select class="calc-select" id="inp-type" onchange="updateCalc()">
+            <option value="reducing">Reducing Balance (standard)</option>
+            <option value="flat">Flat Rate</option>
+          </select>
+        </div>
+
+      </div>
+
+      <!-- RESULTS -->
+      <div class="calc-results">
+        <div class="result-top">
+          <p>Monthly EMI</p>
+          <div class="result-emi"><sup>₹</sup><span id="res-emi">16,133</span></div>
+        </div>
+        <div class="result-grid">
+          <div class="result-item">
+            <div class="result-item-label">Principal</div>
+            <div class="result-item-value" id="res-principal">₹5,00,000</div>
+          </div>
+          <div class="result-item">
+            <div class="result-item-label">Total Interest</div>
+            <div class="result-item-value" id="res-interest">₹80,796</div>
+          </div>
+          <div class="result-item">
+            <div class="result-item-label">Total Payable</div>
+            <div class="result-item-value" id="res-total">₹5,80,796</div>
+          </div>
+          <div class="result-item">
+            <div class="result-item-label">Interest Share</div>
+            <div class="result-item-value" id="res-pct">13.9%</div>
+          </div>
+        </div>
+
+        <!-- Mini donut chart -->
+        <div class="donut-wrap" id="donut-wrap">
+          <svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="60" cy="60" r="46" fill="none" stroke="rgba(255,255,255,.1)" stroke-width="18"/>
+            <circle id="donut-interest" cx="60" cy="60" r="46" fill="none"
+                    stroke="#c8922a" stroke-width="18" stroke-linecap="round"
+                    stroke-dasharray="289 289"
+                    transform="rotate(-90 60 60)"/>
+            <text x="60" y="56" text-anchor="middle" fill="#fff"
+                  font-family="'Playfair Display',serif" font-size="13" font-weight="700" id="donut-lbl-pct">14%</text>
+            <text x="60" y="70" text-anchor="middle" fill="rgba(255,255,255,.4)"
+                  font-family="Inter,sans-serif" font-size="7">interest</text>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- INTEREST RATES -->
+<section id="rates">
+  <div class="section-inner">
+    <p class="section-eyebrow">Market Comparison</p>
+    <h2 class="section-title">Personal Loan Interest Rates</h2>
+    <p class="section-lead">Current indicative rates from major lenders in India. Actual rates depend on credit score, income, and lender policy.</p>
+    <div class="rates-table-wrap">
+      <table class="rates-table">
+        <thead>
+          <tr>
+            <th>Lender</th>
+            <th>Interest Rate (p.a.)</th>
+            <th>Processing Fee</th>
+            <th>Max Loan Amount</th>
+            <th>Max Tenure</th>
+            <th>Special</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>SBI</strong></td>
+            <td><span class="rate-pill">11.00% – 14.00%</span></td>
+            <td>1% + GST</td>
+            <td>₹20 Lakh</td>
+            <td>60 months</td>
+            <td>Govt. employees get lowest rates</td>
+          </tr>
+          <tr>
+            <td><strong>HDFC Bank</strong></td>
+            <td><span class="rate-pill">10.50% – 21.00%</span></td>
+            <td>Up to 2.5%</td>
+            <td>₹40 Lakh</td>
+            <td>60 months</td>
+            <td>Pre-approved offers for customers</td>
+          </tr>
+          <tr>
+            <td><strong>ICICI Bank</strong></td>
+            <td><span class="rate-pill">10.85% – 16.25%</span></td>
+            <td>Up to 2.25%</td>
+            <td>₹50 Lakh</td>
+            <td>60 months</td>
+            <td>Instant disbursal for salary account holders</td>
+          </tr>
+          <tr>
+            <td><strong>Axis Bank</strong></td>
+            <td><span class="rate-pill">10.99% – 22.00%</span></td>
+            <td>Up to 2%</td>
+            <td>₹40 Lakh</td>
+            <td>60 months</td>
+            <td>Step-down EMI option</td>
+          </tr>
+          <tr>
+            <td><strong>Bajaj Finserv</strong></td>
+            <td><span class="rate-pill">13.00% – 31.00%</span></td>
+            <td>Up to 3.93%</td>
+            <td>₹40 Lakh</td>
+            <td>96 months</td>
+            <td>Flexi loan facility available</td>
+          </tr>
+          <tr>
+            <td><strong>Kotak Mahindra</strong></td>
+            <td><span class="rate-pill">10.99% – 36.00%</span></td>
+            <td>Up to 3%</td>
+            <td>₹35 Lakh</td>
+            <td>60 months</td>
+            <td>Online approval in minutes</td>
+          </tr>
+          <tr>
+            <td><strong>Bank of Baroda</strong></td>
+            <td><span class="rate-pill">12.15% – 18.75%</span></td>
+            <td>Up to 2%</td>
+            <td>₹10 Lakh</td>
+            <td>60 months</td>
+            <td>No prepayment penalty after 6 months</td>
+          </tr>
+          <tr>
+            <td><strong>Tata Capital</strong></td>
+            <td><span class="rate-pill">11.99% – 35.00%</span></td>
+            <td>Up to 2.75%</td>
+            <td>₹35 Lakh</td>
+            <td>72 months</td>
+            <td>Top-up loan available after 6 EMIs</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p style="color:var(--muted);font-size:.82rem;margin-top:1rem">* Rates are indicative and subject to change. Always verify with the lender before applying.</p>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq-section" id="faq">
+  <div class="section-inner">
+    <p class="section-eyebrow">Common Questions</p>
+    <h2 class="section-title">Frequently Asked Questions</h2>
+    <hr class="rule"/>
+    <div class="faq-list">
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          What is the maximum personal loan amount I can get?
+          <span class="icon">+</span>
+        </button>
+        <div class="faq-a">
+          <p>Most lenders in India offer personal loans ranging from ₹10,000 to ₹40 lakh. ICICI Bank goes up to ₹50 lakh for select profiles. The sanctioned amount depends on your monthly income, existing liabilities, employer profile, and credit score. Typically, lenders sanction up to 20–25 times your monthly net salary.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          How does my CIBIL score affect my loan?
+          <span class="icon">+</span>
+        </button>
+        <div class="faq-a">
+          <p>Your CIBIL (or Experian/CRIF) score is one of the most important factors. A score above 750 typically gets you the lowest available rates and higher amounts. Scores between 650–749 may still get approval but at higher rates. Below 650, most lenders either reject the application or charge significantly higher interest. Check your score for free on the CIBIL website before applying.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          What is the difference between flat rate and reducing balance rate?
+          <span class="icon">+</span>
+        </button>
+        <div class="faq-a">
+          <p>In a <strong>flat rate</strong> method, interest is calculated on the full principal for the entire tenure. In the <strong>reducing balance</strong> method (also called diminishing rate), interest is charged only on the outstanding principal, which decreases with every EMI paid. As a result, the effective annual rate for a flat-rate loan is almost double the stated rate. Always compare loans on reducing balance basis.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          Can I prepay or foreclose my personal loan?
+          <span class="icon">+</span>
+        </button>
+        <div class="faq-a">
+          <p>Yes, most lenders allow prepayment or foreclosure after a lock-in period of 6–12 months. Prepayment charges typically range from 2%–5% of the outstanding principal. Some lenders (especially public sector banks) charge nil prepayment fees. Always read the loan agreement carefully for prepayment terms before signing.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          Will multiple loan applications hurt my credit score?
+          <span class="icon">+</span>
+        </button>
+        <div class="faq-a">
+          <p>Yes. Every time you apply for a loan, the lender performs a "hard inquiry" on your credit report, which temporarily reduces your score by 5–10 points. Applying to 5 lenders simultaneously signals financial distress to bureaus. Instead, use aggregator platforms to check pre-approved eligibility (soft inquiry), compare, and apply to only 1–2 lenders.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          Is personal loan interest tax-deductible?
+          <span class="icon">+</span>
+        </button>
+        <div class="faq-a">
+          <p>Generally, personal loan interest is not tax-deductible. However, there are exceptions: if you use the loan for home renovation, the interest portion may qualify under Section 24(b). If used for business purposes, it can be claimed as a business expense under Section 37. If used to purchase investments like stocks or mutual funds, the interest may be deductible against capital gains. Consult a tax advisor for your specific situation.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          What happens if I miss an EMI?
+          <span class="icon">+</span>
+        </button>
+        <div class="faq-a">
+          <p>Missing an EMI attracts a late payment penalty (typically ₹200–₹1,000 or 2%–3% of the overdue amount per month). More importantly, it gets reported to credit bureaus and can drop your CIBIL score by 50–100 points. Multiple missed EMIs can lead to your account being classified as NPA (Non-Performing Asset) after 90 days, triggering recovery action. If you anticipate difficulty, contact your lender proactively — many offer a moratorium or restructuring.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div>
+        <div class="footer-brand">Personal<span>Loan</span></div>
+        <p class="footer-about">A comprehensive guide to personal loans in India — built to help borrowers make informed, confident financial decisions.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Learn</h4>
+        <ul>
+          <li><a href="#about">What is a Loan?</a></li>
+          <li><a href="#types">Loan Types</a></li>
+          <li><a href="#eligibility">Eligibility</a></li>
+          <li><a href="#rates">Interest Rates</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Tools</h4>
+        <ul>
+          <li><a href="#calculator">EMI Calculator</a></li>
+          <li><a href="#rates">Rate Comparison</a></li>
+          <li><a href="#faq">FAQ</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Important Terms</h4>
+        <ul>
+          <li><a href="#">APR Explained</a></li>
+          <li><a href="#">CIBIL Score Guide</a></li>
+          <li><a href="#">FOIR Calculator</a></li>
+          <li><a href="#">NPA & Recovery</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 PersonalLoan Guide. For informational purposes only. Not a financial advisor.</p>
+      <p class="creator-tag">Designed &amp; Built by Hard Jangid</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+  /* ── EMI CALCULATOR ── */
+  function fmt(n) {
+    return new Intl.NumberFormat('en-IN').format(Math.round(n));
+  }
+
+  function updateCalc() {
+    const P = parseFloat(document.getElementById('inp-amount').value);
+    const annualRate = parseFloat(document.getElementById('inp-rate').value);
+    const N = parseInt(document.getElementById('inp-tenure').value);
+    const type = document.getElementById('inp-type').value;
+
+    // labels
+    document.getElementById('lbl-amount').textContent = '₹' + fmt(P);
+    document.getElementById('lbl-rate').textContent = annualRate.toFixed(2) + '%';
+    document.getElementById('lbl-tenure').textContent = N + ' months';
+
+    let emi, totalInterest;
+
+    if (type === 'reducing') {
+      const r = annualRate / 12 / 100;
+      if (r === 0) {
+        emi = P / N;
+      } else {
+        emi = P * r * Math.pow(1 + r, N) / (Math.pow(1 + r, N) - 1);
+      }
+      totalInterest = emi * N - P;
+    } else {
+      // flat rate
+      totalInterest = P * (annualRate / 100) * (N / 12);
+      emi = (P + totalInterest) / N;
+    }
+
+    const totalPayable = P + totalInterest;
+    const interestPct = (totalInterest / P) * 100;
+
+    document.getElementById('res-emi').textContent = fmt(emi);
+    document.getElementById('res-principal').textContent = '₹' + fmt(P);
+    document.getElementById('res-interest').textContent = '₹' + fmt(totalInterest);
+    document.getElementById('res-total').textContent = '₹' + fmt(totalPayable);
+    document.getElementById('res-pct').textContent = interestPct.toFixed(1) + '%';
+
+    // donut
+    const circumference = 2 * Math.PI * 46; // ≈ 289
+    const dash = (totalInterest / totalPayable) * circumference;
+    document.getElementById('donut-interest').setAttribute('stroke-dasharray', dash + ' ' + circumference);
+    document.getElementById('donut-lbl-pct').textContent = Math.round(totalInterest / totalPayable * 100) + '%';
+  }
+
+  // init
+  updateCalc();
+
+  /* ── FAQ ── */
+  function toggleFaq(btn) {
+    const item = btn.parentElement;
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+    if (!isOpen) item.classList.add('open');
+  }
+
+  /* ── SMOOTH SCROLL FOR NAV LINKS ── */
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) {
+        e.preventDefault();
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+  });
+</script>
+</body>
+</html>
